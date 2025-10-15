@@ -384,9 +384,11 @@ window.addEventListener('DOMContentLoaded', function() {
         //     }, 6000);
         // } 
 
-       
-unlockPageTikTok('customShopeePopup','{{$product->description}}')
-        // Theo dõi backdrop để khóa/mở scroll
+       setTimeout(function() {
+            unlockPageTikTok('customShopeePopup','{{$product->description}}')
+       }, 500);
+      
+       // Theo dõi backdrop để khóa/mở scroll
         // if (backdrop) {
         //     const observer = new MutationObserver(function() {
         //         if (backdrop.style.display !== 'none') {
