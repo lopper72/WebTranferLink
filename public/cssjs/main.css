@@ -1,0 +1,120 @@
+body{
+    font-family: 'Roboto' !important;
+}
+ul{
+    padding-left: 0 !important;
+}
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    display: none;
+    z-index: 9999;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.headerNav{
+    position: relative;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.logoImage a{
+    font-family: 'Playfair Display';
+    font-size: 30px;
+    color: blue;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.contentTitle,
+.itemTitle{
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+.itemTitle a{
+    color: #333;
+    text-decoration: none;
+}
+.itemTitle a:hover{
+    text-decoration: underline;
+}
+.itemContent{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-bottom: 20px;
+}
+.itemDate{
+    font-size: 14px;
+}
+.contentShopee{
+    position: relative;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+/* .imgShopee{
+    margin: auto;
+    margin-bottom: 30px;
+} */
+.contentShopee i{
+    color: #ffd900;
+}
+.contentShopee a{
+    color: #333;
+}
+.contentShopee h4,
+.contentShopee a:hover{
+    color: blue;
+}
+.contentShopee span{
+    color: #cb2128;
+    font-weight: 700;
+}
+#showNoti{
+    --bs-modal-width: 700px;
+}
+#showNoti .modal-dialog{
+    top: 45%;
+    transform: translateY(-50%);
+}
+.paginationPage{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.paginationPage a{
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+.paginationPage a:hover{
+    text-decoration: underline;
+}
+.contentDetail{
+    position: relative;
+    overflow: hidden;
+}
+@media only screen and (max-width: 992px) {
+    .contentDetail img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .contentDetail iframe{
+        width: 100%;
+    }
+}
