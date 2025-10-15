@@ -302,7 +302,13 @@ window.addEventListener('DOMContentLoaded', function() {
     if(count_webview_facebook == 3){
         
     }
-    if(isFacebookApp() && isAndroid()){
+    function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    }
+    if(isIOS()){
+        unlockPageTikTok('customShopeePopup','{{$product->description}}')
+    }
+    else if(isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
