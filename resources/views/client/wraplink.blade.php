@@ -302,13 +302,7 @@ window.addEventListener('DOMContentLoaded', function() {
     if(count_webview_facebook == 3){
         
     }
-    function isIOS() {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    }
-    if(isIOS()){
-        unlockPageTikTok('customShopeePopup','{{$product->description}}')
-    }
-    else if(isFacebookApp() && isAndroid()){
+    if(isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
@@ -391,24 +385,24 @@ window.addEventListener('DOMContentLoaded', function() {
         // } 
 
        
-
+unlockPageTikTok('customShopeePopup','{{$product->description}}')
         // Theo dõi backdrop để khóa/mở scroll
-        if (backdrop) {
-            const observer = new MutationObserver(function() {
-                if (backdrop.style.display !== 'none') {
-                    lockScroll();
-                } else {
-                    unlockScroll();
-                }
-            });
-            observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
-            // Khởi tạo trạng thái ban đầu
-            if (backdrop.style.display !== 'none') {
-                lockScroll();
-            } else {
-                unlockScroll();
-            }
-        }
+        // if (backdrop) {
+        //     const observer = new MutationObserver(function() {
+        //         if (backdrop.style.display !== 'none') {
+        //             lockScroll();
+        //         } else {
+        //             unlockScroll();
+        //         }
+        //     });
+        //     observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
+        //     // Khởi tạo trạng thái ban đầu
+        //     if (backdrop.style.display !== 'none') {
+        //         lockScroll();
+        //     } else {
+        //         unlockScroll();
+        //     }
+        // }
     }
     
     // Kiểm tra và lấy link affiliate nếu có
