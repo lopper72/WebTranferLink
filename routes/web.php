@@ -155,8 +155,8 @@ Route::get('/admin/logout', [Login::class, 'handleLogout'])->name('admin.logout'
 Route::get('/admin/setup', Setup::class)->middleware([CheckSetup::class])->name('admin.setup');
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
-Route::get('/{slug}', [ClientProductController::class, 'blog'])->name('blog');
-Route::get('/tintuc/{slug}', [WrapLinkDisplayController::class, 'wraplink'])->name('wraplink');
+Route::get('/{slug}', [ClientProductController::class, 'wraplink'])->name('wraplink');
+//Route::get('/tintuc/{slug}', [WrapLinkDisplayController::class, 'wraplink'])->name('wraplink');
 Route::post('/check-url-shopee', [ClientProductController::class, 'checkUrlShopee'])->name('check_url_shopee');
 Route::post('/check-url-tiktok', [ClientProductController::class, 'checkUrlTiktok'])->name('check_url_tiktok');
 Route::post('/resolve-redirect', [ClientProductController::class, 'resolveRedirect']);

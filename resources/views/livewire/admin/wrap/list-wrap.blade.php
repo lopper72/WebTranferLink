@@ -62,7 +62,7 @@
                         </td>
                         <td class="px-2 py-2 whitespace-nowrap">
                                 @php
-                                        $fullLink = url('/tintuc/' . $wraplink->slug);
+                                        $fullLink = url('/' . $wraplink->slug);
                                         $displayLink = strlen($fullLink) > 30 ? substr($fullLink, 0, 30) . '...' : $fullLink;
                                 @endphp
                                 <span class="the-link">{{ $displayLink }}</span>
