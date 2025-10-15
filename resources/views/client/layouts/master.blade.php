@@ -17,13 +17,13 @@
         @endif
         @if (isset($imageUrl2))
             <meta property="og:title" content="{{$product->name}}" />
-            <meta property="og:image" content="" />
+
             <meta property="og:url" content="{{route('wraplink',$product->slug);}}" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="hongbiennhanh.com" />
         @else
             <meta property="og:title" content="hongbiennhanh.com" />
-            <meta property="og:image" content="" />
+      
             <meta property="og:url" content="hongbiennhanh.com" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="hongbiennhanh.com" />
