@@ -25,14 +25,20 @@
             <meta property="og:site_name" content="hongbiennhanh.com" />
             <meta property="og:site_name" content="Blog detail page" />
         @endif
-        @if (isset($imageUrl2))
+        {{-- @if (isset($imageUrl2))
             <meta property="og:title" content="{{$product->name}}" />
             <meta property="og:image" content="{{ $imageUrl2 }}" />
             <meta property="og:url" content="{{route('wraplink',$product->slug);}}" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="hongbiennhanh.com" />
             <meta property="og:description" content="Blog detail page" />
-        @endif
+        @endif --}}
+        <meta property="og:title" content="Tên Đường Dẫn test" />
+            <meta property="og:image" content="https://hongbiennhanh.com/storage/images/wraplinks/1760498241.jpg" />
+            <meta property="og:url" content="https://hongbiennhanh.com/ten-duong-dan-test" />
+            <meta property="og:type" content="website" />
+            <meta property="og:site_name" content="hongbiennhanh.com" />
+            <meta property="og:description" content="Blog detail page" />
         
 		@livewireStyles
 	</head>
