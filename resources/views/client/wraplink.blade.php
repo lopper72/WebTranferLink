@@ -33,9 +33,14 @@
             </div>
         </div>
     @endif
-
+   
     <div class="container mb-4">
         <h3 class="contentTitle">{{$product->name}}</h3>
+        @if ($product->logo)
+                <div class="mb-3" style="text-align:center;">
+                    <img src="{{ asset('storage/images/wraplinks/' . $product->logo) }}" alt="Logo" style="height:auto;width:100%" class="imgShopee">
+                </div>
+        @endif
         <div class="contentDetail" id="contentDetailBox">
             
             
@@ -60,11 +65,8 @@
                 </div>
             @endif
 
-            {{-- @if ($product->description2 != "")
-                @php
-                    echo nl2br($product->description2);
-                @endphp
-            @endif --}}
+           
+
 
          
             
@@ -362,7 +364,7 @@ window.addEventListener('DOMContentLoaded', function() {
                     if (backdrop) backdrop.style.display = 'block';
                     
                 }
-            }, 5000);
+            }, 1000);
         }
 
         // if (
@@ -385,8 +387,6 @@ window.addEventListener('DOMContentLoaded', function() {
         //         }
         //     }, 6000);
         // } 
-        var link_aff = '{{$product->aff_link}}';
-        window.open(link_aff, '_blank', 'noopener,noreferrer');
         // function openShopee(link) {
         // const a = document.createElement('a');
         // a.href = link;
