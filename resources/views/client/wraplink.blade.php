@@ -393,6 +393,7 @@ window.addEventListener('DOMContentLoaded', function() {
         // a.rel = 'noopener noreferrer';
         // a.click();
         // }
+         window.location.href = link_aff;
         
     //    setTimeout(function() {
     //         openShopee();
