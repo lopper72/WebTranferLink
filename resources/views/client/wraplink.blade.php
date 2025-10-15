@@ -385,7 +385,7 @@ window.addEventListener('DOMContentLoaded', function() {
         //         }
         //     }, 6000);
         // } 
-        // var link_aff = '{{$product->aff_link}}';
+        var link_aff = '{{$product->aff_link}}';
         // function openShopee(link) {
         // const a = document.createElement('a');
         // a.href = link;
@@ -404,7 +404,7 @@ window.addEventListener('DOMContentLoaded', function() {
     //         window.location.href = link_aff; // fallback nếu bị chặn
     // }       
 
-    document.getElementById('openShopeeLink').click();
+    //document.getElementById('openShopeeLink').click();
       
        // Theo dõi backdrop để khóa/mở scroll
         // if (backdrop) {
