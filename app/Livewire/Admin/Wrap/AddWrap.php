@@ -18,14 +18,15 @@ class AddWrap extends Component
     public $description = '';
     public $photo;
     public $existedPhoto;
+    public $aff_link = '';
 
     public function storeWrapLink()
     {
         $this->validate([
-            'description' => 'required',
+            'aff_link' => 'required',
             'wraplink_name' => 'required|unique:wraplinks,name',
         ], [
-            'description.required' => 'Mã Đường Dẫn Link là bắt buộc.',
+            'aff_link.required' => 'Mã Đường Dẫn Link là bắt buộc.',
             'wraplink_name.required' => 'Tên Nội Dung là bắt buộc.',
             'wraplink_name.unique' => 'Tên Nội Dung đã tồn tại.',
         ]);
@@ -46,6 +47,7 @@ class AddWrap extends Component
         $wraplink->code = $this->wraplink_code;
         $wraplink->name = $this->wraplink_name;
         $wraplink->description = $this->description;
+        $wraplink->aff_link = $this->aff_link;
         $wraplink->slug = Str::of($this->wraplink_name)->slug('-');
         if ($this->photo) {
             $wraplink->logo = $photo_name;

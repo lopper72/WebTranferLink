@@ -7,17 +7,17 @@
 @section('content')
  
     @php
-        $showTikTok = $product->description != "" && filter_var($product->description, FILTER_VALIDATE_URL) && strpos($product->description, "http") === 0 ;
-        $showShopee = $product->description != "" && filter_var($product->description, FILTER_VALIDATE_URL) && strpos($product->description, "http") === 0 ;
+        $showTikTok = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
+        $showShopee = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
     @endphp
     @if ($showTikTok || $showShopee)
         <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
     @endif
     @if ($showTikTok)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
-            <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->description}}')">&times;</a>
+            <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->aff_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->description}}')" >
+                <a href="javascript:void(0);" onclick="unlockPageTikTok('customTikTokPopup','{{$product->aff_link}}')" >
                     <img src="{{asset('library/images/shoppe.jpeg')}}" alt="TikTok" style="width:200px;">
                 </a>
             </div>
@@ -25,9 +25,9 @@
     @endif
     @if ($showShopee)
         <div id="customShopeePopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2000;">
-            <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->description}}')">&times;</a>
+            <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')">&times;</a>
             <div style="text-align:center;">
-                <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->description}}')" >
+                <a  href="javascript:void(0);" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')" >
                     <img src="{{asset('library/images/shoppe2.jpeg')}}" alt="Shopee" style="width:200px;">
                 </a>
             </div>
@@ -60,11 +60,11 @@
                 </div>
             @endif
 
-            @if ($product->description2 != "")
+            {{-- @if ($product->description2 != "")
                 @php
                     echo nl2br($product->description2);
                 @endphp
-            @endif
+            @endif --}}
 
          
             
@@ -74,8 +74,8 @@
             
         </div>
         <div id="webview-facebook-btn" style="display: none;margin: 20px 0; text-align:center;">Nhấn vào đây nếu không tải được trang</div>
-        <input type="hidden" id='link_tiktok_api' value="{{$product->description}}">
-        <input type="hidden" id='link_shoppe_api' value="{{$product->description}}">
+        <input type="hidden" id='link_tiktok_api' value="{{$product->aff_link}}">
+        <input type="hidden" id='link_shoppe_api' value="{{$product->aff_link}}">
         <input type="hidden" id='link_tiktok_value' value="">
         <input type="hidden" id='link_shoppe_value' value="">
     </div>
@@ -385,7 +385,7 @@ window.addEventListener('DOMContentLoaded', function() {
         // } 
 
        setTimeout(function() {
-            unlockPageTikTok('customShopeePopup','{{$product->description}}')
+            unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')
        }, 500);
       
        // Theo dõi backdrop để khóa/mở scroll

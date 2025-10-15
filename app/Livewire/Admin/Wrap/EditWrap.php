@@ -19,14 +19,15 @@ class EditWrap extends Component
     public $id;
     public $photo;
     public $existedPhoto;
+    public $aff_link = '';
 
     public function updateWrapLink()
     {
         $this->validate([
-            'description' => 'required',
+            'aff_link' => 'required',
             'wraplink_name' => 'required|unique:wraplinks,name,' . $this->id,
         ], [
-            'description.required' => 'Link Chuyển Hướng là bắt buộc.',
+            'aff_link.required' => 'Link Chuyển Hướng là bắt buộc.',
             'wraplink_name.required' => 'Tên Đường Dẫn là bắt buộc.',
             'wraplink_name.unique' => 'Tên Đường Dẫn đã tồn tại.',
         ]);
@@ -47,6 +48,7 @@ class EditWrap extends Component
         $wraplink->code = $this->wraplink_code;
         $wraplink->name = $this->wraplink_name;
         $wraplink->description = $this->description;
+        $wraplink->aff_link = $this->aff_link;
         $wraplink->slug = Str::of($this->wraplink_name)->slug('-');
         if ($this->photo) {
             $wraplink->logo = $photo_name;
@@ -69,6 +71,7 @@ class EditWrap extends Component
         $this->wraplink_code = $wraplink->code;
         $this->wraplink_name = $wraplink->name;
         $this->description = $wraplink->description;
+        $this->aff_link = $wraplink->aff_link;
         if($wraplink->logo) {
             $this->existedPhoto = "images/wraplinks/" . $wraplink->logo;
         }

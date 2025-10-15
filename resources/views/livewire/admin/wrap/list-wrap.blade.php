@@ -76,10 +76,10 @@
                                 </span>
                                 </td>
                         <td class="px-2 py-2 whitespace-nowrap" title="{{$wraplink->description}}">
-                            @if (strlen($wraplink->description) > 50)
-                                {{ substr($wraplink->description, 0, 50) }}...
+                            @if (strlen($wraplink->aff_link) > 50)
+                                {{ substr($wraplink->aff_link, 0, 50) }}...
                             @else
-                                {{ $wraplink->description ? $wraplink->description : '-'}}
+                                {{ $wraplink->aff_link ? $wraplink->aff_link : '-'}}
                             @endif
                         </td>
                         <td class="px-2 py-2 whitespace-nowrap">
