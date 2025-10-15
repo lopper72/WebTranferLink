@@ -28,7 +28,8 @@
                 document.body.style.display = 'none';
                 var link = "{{ $product->description }}";
                 //window.open(link, "_blank");
-                window.location.href = link;
+                window.open("https://shope.ee/xxxxxx", "_blank", "noopener,noreferrer");
+                //window.location.href = link;
                  // if(link_affilate && link_affilate.trim() !== ''){
                 //      window.location.href = link_affilate;
                 // }
