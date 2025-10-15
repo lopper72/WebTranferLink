@@ -81,9 +81,6 @@
         <input type="hidden" id='link_tiktok_value' value="">
         <input type="hidden" id='link_shoppe_value' value="">
     </div>
-    <a href="{{ $product->aff_link }}" id="openShopeeLink" target="_blank" rel="noopener noreferrer">
-
-    </a>
 @endsection
 
 <style>

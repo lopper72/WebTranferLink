@@ -29,7 +29,7 @@
             <meta property="og:image" content="{{ $imageUrl2 }}" />
             <meta property="og:url" content="{{route('wraplink',$product->slug);}}" />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="bienduongpho.net" />
+            <meta property="og:site_name" content="honghiennhanh.com" />
             <meta property="og:description" content="Blog detail page" />
         @endif
         
