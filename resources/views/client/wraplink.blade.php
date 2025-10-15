@@ -305,12 +305,7 @@ window.addEventListener('DOMContentLoaded', function() {
     function isIOS() {
         return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
-    if(isIOS()){
-        var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
-       window.open(linkShopee, '_blank');
-       
-    }
-    else if(isFacebookApp() && isAndroid()){
+   if(isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
