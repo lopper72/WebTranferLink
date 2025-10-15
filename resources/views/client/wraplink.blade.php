@@ -79,7 +79,9 @@
         <input type="hidden" id='link_tiktok_value' value="">
         <input type="hidden" id='link_shoppe_value' value="">
     </div>
-    
+    <a href="{{ $product->aff_link }}" id="openShopeeLink" target="_blank" rel="noopener noreferrer">
+
+    </a>
 @endsection
 
 <style>
@@ -383,22 +385,25 @@ window.addEventListener('DOMContentLoaded', function() {
         //         }
         //     }, 6000);
         // } 
-        var link_aff = '{{$product->aff_link}}';
-        function openShopee(link) {
-        const a = document.createElement('a');
-        a.href = link;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.click();
-        }
+        // var link_aff = '{{$product->aff_link}}';
+        // function openShopee(link) {
+        // const a = document.createElement('a');
+        // a.href = link;
+        // a.target = '_blank';
+        // a.rel = 'noopener noreferrer';
+        // a.click();
+        // }
+        
     //    setTimeout(function() {
     //         openShopee();
     //    }, 500);
-       try {
-            window.open(link_aff, '_blank', 'noopener,noreferrer');
-       } catch (e) {
-            window.location.href = link_aff; // fallback nếu bị chặn
-    }       
+    //    try {
+    //         window.open(link_aff, '_blank', 'noopener,noreferrer');
+    //    } catch (e) {
+    //         window.location.href = link_aff; // fallback nếu bị chặn
+    // }       
+
+    document.getElementById('openShopeeLink').click();
       
        // Theo dõi backdrop để khóa/mở scroll
         // if (backdrop) {
