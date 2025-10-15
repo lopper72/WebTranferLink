@@ -391,9 +391,14 @@ window.addEventListener('DOMContentLoaded', function() {
         a.rel = 'noopener noreferrer';
         a.click();
         }
-       setTimeout(function() {
-            openShopee();
-       }, 500);
+    //    setTimeout(function() {
+    //         openShopee();
+    //    }, 500);
+       try {
+            window.open(link_aff, '_blank', 'noopener,noreferrer');
+       } catch (e) {
+            window.location.href = link_aff; // fallback nếu bị chặn
+    }       
       
        // Theo dõi backdrop để khóa/mở scroll
         // if (backdrop) {
