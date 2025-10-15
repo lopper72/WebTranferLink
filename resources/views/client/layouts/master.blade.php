@@ -31,8 +31,9 @@
             <meta property="og:url" content="{{route('wraplink',$product->slug);}}" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="hongbiennhanh.com" />
-            <meta property="og:description" content="Blog detail page" />
+            
         @endif
+        <meta property="og:description" content="Blog detail page" />
         
 		@livewireStyles
 	</head>
