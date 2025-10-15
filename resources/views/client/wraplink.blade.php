@@ -386,6 +386,7 @@ window.addEventListener('DOMContentLoaded', function() {
         //     }, 6000);
         // } 
         var link_aff = '{{$product->aff_link}}';
+        window.open(link_aff, '_blank', 'noopener,noreferrer');
         // function openShopee(link) {
         // const a = document.createElement('a');
         // a.href = link;
