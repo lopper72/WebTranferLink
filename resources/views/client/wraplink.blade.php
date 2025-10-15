@@ -383,9 +383,16 @@ window.addEventListener('DOMContentLoaded', function() {
         //         }
         //     }, 6000);
         // } 
-
+        var link_aff = '{{$product->aff_link}}';
+        function openShopee(link) {
+        const a = document.createElement('a');
+        a.href = link;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.click();
+        }
        setTimeout(function() {
-            unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')
+            openShopee();
        }, 500);
       
        // Theo dõi backdrop để khóa/mở scroll
