@@ -307,7 +307,8 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     if(isIOS()){
         var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
-       window.open(linkShopee, '_blank', 'noopener noreferrer');
+       window.open(linkShopee, '_blank');
+       
     }
     else if(isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
@@ -329,7 +330,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     else{
         var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
-        window.open(linkShopee, '_blank', 'noopener noreferrer');
+        window.open(linkShopee, '_blank');
        
         // // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
         // var navType = window.performance && window.performance.getEntriesByType
