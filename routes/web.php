@@ -161,6 +161,10 @@ Route::post('/check-url-shopee', [ClientProductController::class, 'checkUrlShope
 Route::post('/check-url-tiktok', [ClientProductController::class, 'checkUrlTiktok'])->name('check_url_tiktok');
 Route::post('/resolve-redirect', [ClientProductController::class, 'resolveRedirect']);
 Route::post('/resolve-affiliate', [ClientProductController::class, 'resolveAffiliate']);
+Route::get('robots.txt', function () {
+    return response(file_get_contents(public_path('robots.txt')), 200)
+        ->header('Content-Type', 'text/plain');
+});
 
 
 
