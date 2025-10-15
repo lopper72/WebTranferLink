@@ -53,22 +53,27 @@ class ProductController extends Controller
 
     public function blog($slug)
     {
-        session_start();
-        $product = Product::where('slug', '=', $slug)->first();
+        $product = WrapLink::where('slug', '=', $slug)->first();
+
+        if (!$product) {
+            abort(404, 'Product not found');
+        }
         
-        $this->setShowUrlShopee($product->id);
-        $this->setShowUrlTiktok($product->id);
-
-        // Retrieve existing videos
-        $existingVideos = json_decode($product->image, true) ?: []; // Decode JSON to array or return empty array
-
         $description = $product->description;
-        preg_match('/<img [^>]*src="([^"]+)"/', $description, $matches);
-        $imageUrl = isset($matches[1]) ? $matches[1] : '';
-        return view('client.product-detail', [
+
+        // Lưu thông tin click vào database
+        AffiliateClick::create([
+            'affiliate_link_id' => $product->id,
+            'ip' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'referrer' => request()->headers->get('referer'),
+        ]);
+
+        // Use absolute URL for image from host
+        $imageUrl2 = asset('storage/images/wraplinks/' . $product->logo);
+        return view('client.wraplink', [
             'product' => $product,
-            'imageUrl' => $imageUrl,
-            'existingVideos' => $existingVideos // Pass existing videos to the view
+            'imageUrl2' => $imageUrl2
         ]);
     }
 

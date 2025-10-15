@@ -51,7 +51,7 @@
             @endif --}}
 
             {{-- Display existing videos --}}
-            @if (!empty($existingVideos))
+            {{-- @if (!empty($existingVideos))
                
                 <div class="video-gallery">
                     @foreach ($existingVideos as $video)
@@ -63,7 +63,7 @@
                         </div>
                     @endforeach
                 </div>
-            @endif
+            @endif --}}
 
            
 

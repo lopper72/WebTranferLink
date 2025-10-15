@@ -19,10 +19,11 @@
         
         @if (isset($imageUrl))
             <meta property="og:title" content="{{$product->name}}" />
-            <meta property="og:image" content="<?php if($imageUrl != ""){ echo htmlspecialchars($imageUrl);} ?>" />
-            <meta property="og:url" content="{{route('blog',$product->slug);}}" />
+            <meta property="og:image" content="{{ $imageUrl }}" />
+            <meta property="og:url" content="{{route('wraplink',$product->slug);}}" />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="Biến Đường Phố" />
+            <meta property="og:site_name" content="hongbiennhanh.com" />
+            <meta property="og:site_name" content="Blog detail page" />
         @endif
         @if (isset($imageUrl2))
             <meta property="og:title" content="{{$product->name}}" />
