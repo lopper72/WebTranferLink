@@ -23,7 +23,7 @@
             <meta property="og:site_name" content="hongbiennhanh.com" />
         @else
             <meta property="og:title" content="hongbiennhanh.com" />
-            <meta property="og:image" content="{{ asset('storage/images/wraplinks/1760522032.jpg') }}" />
+            <meta property="og:image" content="{{ asset('storage/images/users/logo.jpg') }}" />
             <meta property="og:url" content="hongbiennhanh.com" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="hongbiennhanh.com" />
