@@ -2,7 +2,7 @@
     <div class="container">
         <div class="logoImage">
             <a href="{{ route('index') }}">
-                Biến Đường Phố
+                Trang Chủ
             </a>
         </div>
     </div>

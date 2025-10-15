@@ -36,15 +36,15 @@
                 @endphp
                 <div class="col-lg-4 col-md-6 col-12 mb-lg-5 mb-4">
                     <div class="item">
-                        <h3 class="itemTitle"><a href="{{route('blog',$item->slug);}}">{{$item->name}}</a></h3>
+                        {{-- <h3 class="itemTitle"><a href="{{route('blog',$item->slug);}}">{{$item->name}}</a></h3>
                         <div class="itemContent">
                             @php
                                 if($cleanHtml != ""){
                                     echo $cleanHtml;
                                 }
                             @endphp
-                        </div>
-                        <div class="itemDate">Ngày đăng: {{date('d/m/Y', strtotime($item->created_at))}}</div>
+                        </div> --}}
+                        {{-- <div class="itemDate">Ngày đăng: {{date('d/m/Y', strtotime($item->created_at))}}</div> --}}
                     </div>
                 </div>
             @endforeach
