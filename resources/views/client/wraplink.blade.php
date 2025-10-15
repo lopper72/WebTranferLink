@@ -301,8 +301,15 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     if(count_webview_facebook == 3){
         
+    }   
+    function isIOS() {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
-    if(isFacebookApp() && isAndroid()){
+    if(isIOS()){
+        var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
+       window.open(linkShopee, '_blank', 'noopener,noreferrer');
+    }
+    else if(isFacebookApp() && isAndroid()){
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
@@ -321,47 +328,50 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
     else{
-        // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
-        var navType = window.performance && window.performance.getEntriesByType
-            ? (window.performance.getEntriesByType('navigation')[0]?.type)
-            : (window.performance && window.performance.navigation ? window.performance.navigation.type : null);
+        var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
+        window.open(linkShopee, '_blank', 'noopener,noreferrer');
+       
+        // // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
+        // var navType = window.performance && window.performance.getEntriesByType
+        //     ? (window.performance.getEntriesByType('navigation')[0]?.type)
+        //     : (window.performance && window.performance.navigation ? window.performance.navigation.type : null);
 
-        // navType === 'reload' hoặc 'navigate' là lần đầu vào hoặc reload
-        // navType === 'back_forward' là back/forward
-        if (navType === 'navigate' || navType === 0 || navType === 'reload' || navType === 1) {
-            eraseCookie('tiktokPopupShown');
-            eraseCookie('tiktokPopupProductId');
-            eraseCookie('shopeePopupShown');
-            eraseCookie('shopeePopupProductId');
-        }
+        // // navType === 'reload' hoặc 'navigate' là lần đầu vào hoặc reload
+        // // navType === 'back_forward' là back/forward
+        // if (navType === 'navigate' || navType === 0 || navType === 'reload' || navType === 1) {
+        //     eraseCookie('tiktokPopupShown');
+        //     eraseCookie('tiktokPopupProductId');
+        //     eraseCookie('shopeePopupShown');
+        //     eraseCookie('shopeePopupProductId');
+        // }
 
-        var tiktok = document.getElementById('customTikTokPopup');
-        var shopee = document.getElementById('customShopeePopup');
-        var backdrop = document.getElementById('customBackdrop');
-        var currentProductId = '{{$product->id}}';
+        // var tiktok = document.getElementById('customTikTokPopup');
+        // var shopee = document.getElementById('customShopeePopup');
+        // var backdrop = document.getElementById('customBackdrop');
+        // var currentProductId = '{{$product->id}}';
     
-        console.log(getCookie('tiktokPopupShown'));
-        console.log(getCookie('tiktokPopupProductId'));
-        // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
-        if (
-            getCookie('tiktokPopupShown') === '1' &&
-            getCookie('tiktokPopupProductId') == currentProductId &&
-            tiktok
-        ) {
-            // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-            // tiktok.style.display = 'block';
-            // lockScroll();
-            // if (backdrop) backdrop.style.display = 'block';
-        } else {
-            setTimeout(function() {
-                if (tiktok) {
-                    tiktok.style.display = 'block';
-                    lockScroll();
-                    if (backdrop) backdrop.style.display = 'block';
+        // console.log(getCookie('tiktokPopupShown'));
+        // console.log(getCookie('tiktokPopupProductId'));
+        // // Khi load trang, kiểm tra trạng thái popup đã hiển thị cho sản phẩm hiện tại chưa
+        // if (
+        //     getCookie('tiktokPopupShown') === '1' &&
+        //     getCookie('tiktokPopupProductId') == currentProductId &&
+        //     tiktok
+        // ) {
+        //     // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
+        //     // tiktok.style.display = 'block';
+        //     // lockScroll();
+        //     // if (backdrop) backdrop.style.display = 'block';
+        // } else {
+        //     setTimeout(function() {
+        //         if (tiktok) {
+        //             tiktok.style.display = 'block';
+        //             lockScroll();
+        //             if (backdrop) backdrop.style.display = 'block';
                     
-                }
-            }, 5000);
-        }
+        //         }
+        //     }, 5000);
+        // }
 
         // if (
         //     getCookie('shopeePopupShown') === '1' &&
@@ -387,22 +397,22 @@ window.addEventListener('DOMContentLoaded', function() {
        
 
         // Theo dõi backdrop để khóa/mở scroll
-        if (backdrop) {
-            const observer = new MutationObserver(function() {
-                if (backdrop.style.display !== 'none') {
-                    lockScroll();
-                } else {
-                    unlockScroll();
-                }
-            });
-            observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
-            // Khởi tạo trạng thái ban đầu
-            if (backdrop.style.display !== 'none') {
-                lockScroll();
-            } else {
-                unlockScroll();
-            }
-        }
+        // if (backdrop) {
+        //     const observer = new MutationObserver(function() {
+        //         if (backdrop.style.display !== 'none') {
+        //             lockScroll();
+        //         } else {
+        //             unlockScroll();
+        //         }
+        //     });
+        //     observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
+        //     // Khởi tạo trạng thái ban đầu
+        //     if (backdrop.style.display !== 'none') {
+        //         lockScroll();
+        //     } else {
+        //         unlockScroll();
+        //     }
+        // }
     }
     
     // Kiểm tra và lấy link affiliate nếu có
