@@ -10,7 +10,7 @@
         $showShopee = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
     @endphp
     @if ($showTikTok || $showShopee)
-        <div id="customBackdrop" class="custom-backdrop" style="display:none;"></div>
+        <div id="customBackdrop" class="custom-backdrop" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')" style="display:none;"></div>
     @endif
     @if ($showTikTok)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
@@ -33,7 +33,7 @@
         </div>
     @endif
    
-    <div class="container mb-4">
+    <div class="container mb-4" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')">
         <h3 class="contentTitle">{{$product->name}}</h3>
         @if ($product->logo)
                 <div class="mb-3 hideWebViewAndoid" style="text-align:center;">
