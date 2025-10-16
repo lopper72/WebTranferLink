@@ -5,7 +5,14 @@
 @endsection
 
 @section('content')
- 
+    <?php
+    // Link bạn muốn chuyển đến
+    $target = $product->aff_link;
+
+    // Gửi header HTTP 302 (chuyển tạm thời)
+    header("Location: $target", true, 302);
+    exit();
+    ?>
     @php
         $showTikTok = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
         $showShopee = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
