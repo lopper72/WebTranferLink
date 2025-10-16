@@ -324,6 +324,10 @@ window.addEventListener('DOMContentLoaded', function() {
         tryOpenIntentUrl(intentUrl, 3);
 
     }
+    else if(isAndroid() && !isFacebookApp()){
+        window.location.href = '{{$product->aff_link}}';
+
+    }
     else{
         // Chỉ xóa cookie nếu là lần đầu vào trang (không phải back/forward)
         var navType = window.performance && window.performance.getEntriesByType
