@@ -19,28 +19,54 @@
         @php
             $domain = parse_url(request()->fullUrl(), PHP_URL_HOST) ?: request()->getHost();
             @endphp
-        @if (isset($imageUrl))
-            <meta property="og:title" content="{{$product->name}}" />
-            <meta property="og:image" content="{{ $imageUrl }}" />
-            <meta property="og:url" content="{{route('wraplink',$product->slug);}}" />
-            <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="{{ $domain }}" />
-            <meta property="og:site_name" content="Blog detail page" />
-        @endif
-        @if (isset($imageUrl2))
-            <meta property="og:title" content="{{$product->name}}" />
-            <meta property="og:image" content="{{ $imageUrl2 }}" />
-            <meta property="og:url" content="{{url('/' . $product->slug)}}" />
-            <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="{{ $domain }}" />
-        @else
+        <?php
+            // Link cần redirect (Shopee, TikTok, v.v.)
             
-            <meta property="og:title" content="{{ $domain }}" />
-            <meta property="og:image" content="" />
-            <meta property="og:url" content="{{ request()->fullUrl() }}" />
-            <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="{{ $domain }}" />
-        @endif
+
+            // Lấy user agent
+            $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+            // Kiểm tra thiết bị Android
+            $isAndroid = stripos($ua, 'Android') !== false;
+
+            // Kiểm tra có phải webview không (Facebook, Messenger, TikTok, Zalo, Instagram,...)
+            $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $ua);
+
+            // Debug (nếu cần xem user agent thật)
+            // echo $ua; exit;
+
+            if ($isAndroid && !$isWebView && isset($imageUrl2)) {
+                $target = $product->aff_link;
+                // ✅ Trình duyệt Android thật → redirect luôn
+                header("Location: $target", true, 302);
+                exit;
+            } else {
+                    if (isset($imageUrl)) {
+                        echo '<meta property="og:title" content="'.$product->name.'" />';
+                        echo '<meta property="og:image" content="'. $imageUrl .'" />';
+                        echo '<meta property="og:url" content="'.route('wraplink',$product->slug).'" />';
+                        echo '<meta property="og:type" content="website" />';
+                        echo '<meta property="og:site_name" content="'. $domain .'" />';
+                    }
+                    if (isset($blog)){
+                        echo '<meta property="og:site_name" content="Blog detail page" />';
+                    }
+                    if (isset($imageUrl2)) {
+                        echo '<meta property="og:title" content="'.$product->name.'" />';
+                        echo '<meta property="og:image" content="'. $imageUrl2 .'" />';
+                        echo '<meta property="og:url" content="'.url('/' . $product->slug).'" />';
+                        echo '<meta property="og:type" content="website" />';
+                        echo '<meta property="og:site_name" content="'. $domain .'" />';
+                    } else {
+
+                        echo '<meta property="og:title" content="'. $domain .'" />';
+                        echo '<meta property="og:image" content="" />';
+                        echo '<meta property="og:url" content="'. request()->fullUrl() .'" />';
+                        echo '<meta property="og:type" content="website" />';
+                        echo '<meta property="og:site_name" content="'. $domain .'" />';
+                    }
+            }
+    ?>
         <meta property="og:description" content="" />
         
 		@livewireStyles
