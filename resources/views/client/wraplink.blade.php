@@ -467,9 +467,8 @@ async function handleShopeeLink(id,link) {
     function isAndroid() {
         return /Android/.test(navigator.userAgent);
     }
-   
-        if (isIOS()) {
-            window.open(link, '_blank');
+       if (isIOS()) {
+            window.open(link, '_blank','noopener,noreferrer');
             //openShopeeAffiliate(link);
         }else if(isAndroid()){
             // Nếu có dữ liệu thì tự động chuyển hướng
@@ -481,12 +480,12 @@ async function handleShopeeLink(id,link) {
             // else{
                
             // }
-            window.open(link, '_blank');
+            window.open(link, '_blank','noopener,noreferrer');
             
         } 
         else {
             //openShopeeAffiliate(link);
-            window.open(link, '_blank');
+            window.open(link, '_blank','noopener,noreferrer');
             //window.location.href = link;
         }
     
@@ -558,11 +557,11 @@ function openTikTokApp(tiktokWebUrl) {
         window.location = deepLink;
         // Fallback: sau 1.5s mở web TikTok nếu app không mở
         setTimeout(function() {
-            window.open(tiktokWebUrl, '_blank');
+            window.open(tiktokWebUrl, '_blank','noopener,noreferrer');
         }, 1500);
     } else {
         // Nếu không phải link video, mở web TikTok
-        window.open(tiktokWebUrl, '_blank');
+        window.open(tiktokWebUrl, '_blank','noopener,noreferrer');
     }
 }
 
