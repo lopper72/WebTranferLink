@@ -138,7 +138,7 @@
     <script>
      function copyLink(el) {
     // Lấy text trong cùng hàng
-        const linkText = el.closest('tr').querySelector('input.full-link').value;
+        const linkText = el.closest('td').querySelector('input.full-link').value;
 
         navigator.clipboard.writeText(linkText).then(() => {
         alert('Đã copy: ' + linkText);
