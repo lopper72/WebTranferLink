@@ -469,7 +469,8 @@ async function handleShopeeLink(id,link) {
         return /Android/.test(navigator.userAgent);
     }
        if (isIOS()) {
-            window.open(link, '_blank','noopener noreferrer');
+            window.location.href = link;
+            // window.open(link, '_blank','noopener,noreferrer');
             //openShopeeAffiliate(link);
         }else if(isAndroid()){
             // Nếu có dữ liệu thì tự động chuyển hướng
