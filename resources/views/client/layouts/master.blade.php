@@ -36,12 +36,12 @@
         @else
             
             <meta property="og:title" content="{{ $domain }}" />
-            <meta property="og:image" content="{{ asset('storage/images/wraplinks/1760522032.jpg') }}" />
+            <meta property="og:image" content="" />
             <meta property="og:url" content="{{ request()->fullUrl() }}" />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="{{ $domain }}" />
         @endif
-        <meta property="og:description" content="Blog detail page" />
+        <meta property="og:description" content="" />
         
 		@livewireStyles
 	</head>
