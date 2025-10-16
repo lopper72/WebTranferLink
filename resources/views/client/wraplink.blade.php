@@ -33,7 +33,7 @@
         </div>
     @endif
    
-    <div class="container mb-4" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')">
+    <div class="container mb-4" >
         <h3 class="contentTitle">{{$product->name}}</h3>
         @if ($product->logo)
                 <div class="mb-3 hideWebViewAndoid" style="text-align:center;">
