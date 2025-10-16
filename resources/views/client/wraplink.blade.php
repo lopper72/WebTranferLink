@@ -325,7 +325,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
     else if(isAndroid() && !isFacebookApp()){
-        window.open(link, '_blank','noopener,noreferrer');
+        window.open(link, '_blank');
         // window.location.href = '{{$product->aff_link}}';
 
     }
@@ -469,7 +469,7 @@ async function handleShopeeLink(id,link) {
         return /Android/.test(navigator.userAgent);
     }
        if (isIOS()) {
-            window.open(link, '_blank','noopener,noreferrer');
+            window.open(link, '_blank');
             //openShopeeAffiliate(link);
         }else if(isAndroid()){
             // Nếu có dữ liệu thì tự động chuyển hướng
@@ -482,12 +482,12 @@ async function handleShopeeLink(id,link) {
                
             // }
        
-            window.open(link, '_blank','noopener,noreferrer');
+            window.open(link, '_blank');
             
         } 
         else {
             //openShopeeAffiliate(link);
-            window.open(link, '_blank','noopener,noreferrer');
+            window.open(link, '_blank');
             //window.location.href = link;
         }
     
@@ -559,11 +559,11 @@ function openTikTokApp(tiktokWebUrl) {
         window.location = deepLink;
         // Fallback: sau 1.5s mở web TikTok nếu app không mở
         setTimeout(function() {
-            window.open(tiktokWebUrl, '_blank','noopener,noreferrer');
+            window.open(tiktokWebUrl, '_blank');
         }, 1500);
     } else {
         // Nếu không phải link video, mở web TikTok
-        window.open(tiktokWebUrl, '_blank','noopener,noreferrer');
+        window.open(tiktokWebUrl, '_blank');
     }
 }
 
