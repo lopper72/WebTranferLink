@@ -5,14 +5,6 @@
 @endsection
 
 @section('content')
-    <?php
-    // Link bạn muốn chuyển đến
-    $target = $product->aff_link;
-
-    // Gửi header HTTP 302 (chuyển tạm thời)
-    header("Location: $target", true, 302);
-    exit();
-    ?>
     @php
         $showTikTok = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
         $showShopee = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
@@ -44,7 +36,7 @@
     <div class="container mb-4">
         <h3 class="contentTitle">{{$product->name}}</h3>
         @if ($product->logo)
-                <div class="mb-3" style="text-align:center;">
+                <div class="mb-3 hideWebViewAndoid" style="text-align:center;">
                     <img src="{{ asset('storage/images/wraplinks/' . $product->logo) }}" alt="Logo" style="height:auto;width:100%" class="imgShopee">
                 </div>
         @endif
@@ -311,6 +303,10 @@ window.addEventListener('DOMContentLoaded', function() {
         
     }
     if(isFacebookApp() && isAndroid()){
+        hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
+        hideWebViewAndoid.forEach(function(elem) {
+            elem.style.display = 'none';
+        });
         var currentUrl = window.location.href;
         // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         if (currentUrl.indexOf('?') === -1) {
