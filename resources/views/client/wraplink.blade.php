@@ -325,7 +325,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
     else if(isAndroid() && !isFacebookApp()){
-        window.location.href = '{{$product->aff_link}}';
+        window.open(link, '_blank','noopener,noreferrer');
+        // window.location.href = '{{$product->aff_link}}';
 
     }
     else{
@@ -480,7 +481,7 @@ async function handleShopeeLink(id,link) {
             // else{
                
             // }
-            window.location.href = link;
+       
             window.open(link, '_blank','noopener,noreferrer');
             
         } 
