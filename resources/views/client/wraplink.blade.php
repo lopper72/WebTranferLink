@@ -480,6 +480,7 @@ async function handleShopeeLink(id,link) {
             // else{
                
             // }
+            window.location.href = link;
             window.open(link, '_blank','noopener,noreferrer');
             
         } 
