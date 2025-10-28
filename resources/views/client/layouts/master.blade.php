@@ -29,16 +29,22 @@
             // Kiểm tra thiết bị Android
             $isAndroid = stripos($ua, 'Android') !== false;
 
+            $isIOS = stripos($ua, 'iPhone') !== false || stripos($ua, 'iPad') !== false || stripos($ua, 'iPod') !== false;
+
             // Kiểm tra có phải webview không (Facebook, Messenger, TikTok, Zalo, Instagram,...)
             $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $ua);
 
             // Debug (nếu cần xem user agent thật)
             // echo $ua; exit;
-            if ($isAndroid && $isWebView && isset($imageUrl2)){
+            if (!$isAndroid && !$isWebView && isset($imageUrl2) && !$isIOS){
                 $target = $product->aff_link;
                 // ✅ Trình duyệt Android thật → redirect luôn
-                header("Location: $target", true, 301);
-                exit;
+                //header("Location: $target", true, 301);
+                header("HTTP/1.1 301 Moved Permanently");
+                header("Location: $target");
+                header("Cache-Control: no-store, no-cache, must-revalidate");
+                header("Pragma: no-cache");
+                exit();
             }
             else if ($isAndroid && !$isWebView && isset($imageUrl2)) {
                 $target = $product->aff_link;
