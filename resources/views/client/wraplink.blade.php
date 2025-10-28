@@ -338,7 +338,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
     else if(isAndroid() && !isFacebookApp()){
-        window.open(link, '_blank');
+        window.open('{{$product->aff_link}}', '_blank');
         // window.location.href = '{{$product->aff_link}}';
 
     }
