@@ -34,7 +34,10 @@ class ProductController extends Controller
         }
         
         $description = $product->description;
-
+        $url = url('/' . $product->slug);
+        // Redirect to the generated URL
+        return redirect()->away($url);
+       
         // Lưu thông tin click vào database
         AffiliateClick::create([
             'affiliate_link_id' => $product->id,
@@ -43,12 +46,11 @@ class ProductController extends Controller
             'referrer' => request()->headers->get('referer'),
         ]);
 
-        // Use absolute URL for image from host
-        $imageUrl2 = asset('storage/images/wraplinks/' . $product->logo);
-        return view('client.wraplink', [
-            'product' => $product,
-            'imageUrl2' => $imageUrl2
-        ]);
+
+        // return view('client.wraplink', [
+        //     'product' => $product,
+        //     'imageUrl2' => $imageUrl2
+        // ]);
     }
 
     public function blog($slug)
