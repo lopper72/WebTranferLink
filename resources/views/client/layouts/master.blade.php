@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>@yield('title')</title>
+        <link rel="icon" type="image/x-icon" href="{{asset('library/images/favicon.jpg')}}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('cssjs/main.css') }}?v={{date('dmYH', time())}}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         @php
             $domain = parse_url(request()->fullUrl(), PHP_URL_HOST) ?: request()->getHost();
             @endphp
@@ -15,23 +29,16 @@
             // Kiểm tra thiết bị Android
             $isAndroid = stripos($ua, 'Android') !== false;
 
-            $isIOS = stripos($ua, 'iPhone') !== false || stripos($ua, 'iPad') !== false || stripos($ua, 'iPod') !== false;
-
             // Kiểm tra có phải webview không (Facebook, Messenger, TikTok, Zalo, Instagram,...)
             $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $ua);
 
             // Debug (nếu cần xem user agent thật)
             // echo $ua; exit;
-            if ($isAndroid){
+            if ($isAndroid && $isWebView && isset($imageUrl2)){
                 $target = $product->aff_link;
                 // ✅ Trình duyệt Android thật → redirect luôn
-                //header("Location: $target", true, 301);
-                header("HTTP/1.1 301 Moved Permanently");
-                header("Location: $target");
-                header("Cache-Control: no-store, no-cache, must-revalidate");
-                header("Pragma: no-cache");
-                ob_end_clean(); 
-                exit();
+                header("Location: $target", true, 302);
+                exit;
             }
             else if ($isAndroid && !$isWebView && isset($imageUrl2)) {
                 $target = $product->aff_link;
@@ -66,22 +73,7 @@
             }
     ?>
         <meta property="og:description" content="" />
-
-        <meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>@yield('title')</title>
-        <link rel="icon" type="image/x-icon" href="{{asset('library/images/favicon.jpg')}}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('cssjs/main.css') }}?v={{date('dmYH', time())}}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
 		@livewireStyles
 	</head>
 	<body>
