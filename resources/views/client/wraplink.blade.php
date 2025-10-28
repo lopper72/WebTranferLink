@@ -79,6 +79,7 @@
         <input type="hidden" id='link_shoppe_api' value="{{$product->aff_link}}">
         <input type="hidden" id='link_tiktok_value' value="">
         <input type="hidden" id='link_shoppe_value' value="">
+        <a id="fastLink" style="display:none" href="#">Đang tải...</a>
     </div>
 @endsection
 
@@ -175,29 +176,29 @@ function unlockScroll() {
 function unlockPageTikTok(id,link){
     var idProduct = {{$product->id}};
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    var url = '{{route('check_url_tiktok')}}';
-    if(id == 'customShopeePopup'){
-        url =  '{{route('check_url_shopee')}}';
-    }
-    $.ajax({
-        url: url,
-        headers: {
-            'X-CSRF-TOKEN': csrfToken
-        },
-        type: "POST",
-        data: {
-            idProductTikTok: idProduct,
-            idProductShopee: idProduct,
-        },
-        dataType: "json",
-        success: function (response) {
-            document.getElementById(id).style.display = 'none';
+    //var url = '{{route('check_url_tiktok')}}';
+    // if(id == 'customShopeePopup'){
+    //     url =  '{{route('check_url_shopee')}}';
+    // }
+    // $.ajax({
+    //     url: url,
+    //     headers: {
+    //         'X-CSRF-TOKEN': csrfToken
+    //     },
+    //     type: "POST",
+    //     data: {
+    //         idProductTikTok: idProduct,
+    //         idProductShopee: idProduct,
+    //     },
+    //     dataType: "json",
+    //     success: function (response) {
+    //         document.getElementById(id).style.display = 'none';
             
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    //     },
+    //     error: function (response) {
+    //         console.log(response);
+    //     }
+    // });
     // Chuyển đổi link Shopee web sang link app nếu có
     checkHideBackdrop(id);
     handleShopeeLink(id,link);
@@ -292,6 +293,18 @@ function clickWebViewFacebook(){
 
 // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
 window.addEventListener('DOMContentLoaded', function() {
+    // const original = "{{$product->aff_link}}";
+
+    // fetch(original, {redirect: 'follow'})
+    //     .then(response => {
+    //         const finalUrl = response.url;
+    //         const a = document.getElementById('fastLink');
+    //         a.href = finalUrl;
+    //         a.textContent = finalUrl;
+    //     })
+    //     .catch(err => {
+    //         document.getElementById('fastLink').textContent = 'Lỗi tải link';
+    //     });
 
     function isFacebookApp() {
         return /FBAN|FBAV/i.test(navigator.userAgent);
@@ -433,16 +446,16 @@ window.addEventListener('DOMContentLoaded', function() {
     
     // Kiểm tra và lấy link affiliate nếu có
    
-    var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
-    console.log(linkTiktok);
-    if (linkTiktok && linkTiktok.trim() !== '') {
-        openShopeeAffiliate(linkTiktok);
-    }
-    var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
-    console.log(linkShopee);
-    if (linkShopee && linkShopee.trim() !== '') {
-        openShopeeAffiliate(linkShopee);
-    }
+    // var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
+    // console.log(linkTiktok);
+    // if (linkTiktok && linkTiktok.trim() !== '') {
+    //     openShopeeAffiliate(linkTiktok);
+    // }
+    // var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
+    // console.log(linkShopee);
+    // if (linkShopee && linkShopee.trim() !== '') {
+    //     openShopeeAffiliate(linkShopee);
+    // }
         // Nếu muốn xử lý TikTok affiliate, có thể thêm logic tương tự ở đây
     // var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
     // if (linkTiktok && linkTiktok.trim() !== '') {
