@@ -34,7 +34,7 @@
 
             // Debug (nếu cần xem user agent thật)
             // echo $ua; exit;
-             if ($isAndroid && !$isWebView && isset($imageUrl2)) {
+             if (!$isWebView) {
                 $target = $product->aff_link;
                 // ✅ Trình duyệt Android thật → redirect luôn
                 header("Location: $target", true, 302);
