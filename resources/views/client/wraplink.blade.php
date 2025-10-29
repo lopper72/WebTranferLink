@@ -255,7 +255,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     if(isFacebookApp() && isAndroid()){
         window.open('{{$product->aff_link}}', '_blank');
-        
+        window.location.href = '{{$product->aff_link}}';
         // hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
         // hideWebViewAndoid.forEach(function(elem) {
         //     elem.style.display = 'none';
