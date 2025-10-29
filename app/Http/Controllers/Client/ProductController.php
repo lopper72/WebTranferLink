@@ -47,7 +47,7 @@ class ProductController extends Controller
         ]);
 
         $imageUrl2 = asset('storage/images/wraplinks/' . $product->logo);
-        return view('client.wraplink', [
+        return view('client.link', [
             'product' => $product,
             'imageUrl2' => $imageUrl2
         ]);
