@@ -2,7 +2,8 @@
     ob_start();
      $ua = request()->header('User-Agent', '');
      $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $ua);
-     if (!$isWebView) {
+     $isCrawler = preg_match('/facebookexternalhit|Facebot|Twitterbot|Pinterest|Zalo/i', $ua);
+     if (!$isWebView && !$isCrawler) {
                 $target = $product->aff_link;
                 header("Location: $target", true, 302);
                 ob_end_clean();
