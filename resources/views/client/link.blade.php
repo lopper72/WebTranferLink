@@ -14,6 +14,7 @@
                 echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
                 echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
                 echo '<meta property="og:title" content="'.$product->name.'" />';
+                echo '<meta property="og:description" content="'. $product->name .'" />';
                 echo '<meta property="og:image" content="'. $imageUrl2 .'" />';
                 echo '<meta property="og:url" content="'.url('/' . $product->slug).'" />';
                 echo '<meta property="og:type" content="website" />';
