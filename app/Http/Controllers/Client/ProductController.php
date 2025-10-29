@@ -45,11 +45,13 @@ class ProductController extends Controller
             'user_agent' => request()->userAgent(),
             'referrer' => request()->headers->get('referer'),
         ]);
+        $countClick = AffiliateClick::where('affiliate_link_id', $product->id)->count();
 
         $imageUrl2 = asset('storage/images/wraplinks/' . $product->logo);
         return view('client.link', [
             'product' => $product,
-            'imageUrl2' => $imageUrl2
+            'imageUrl2' => $imageUrl2,
+            'countClick' => $countClick
         ]);
     }
 

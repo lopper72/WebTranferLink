@@ -1,5 +1,5 @@
  <?php
-    ob_start();
+     ob_start();
      $ua = request()->header('User-Agent', '');
      if (empty($ua)) {
          $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
@@ -9,7 +9,7 @@
      $isCrawler = preg_match('/facebookexternalhit|Facebot|Twitterbot|Pinterest|Zalo/i', $ua);
      $affLink = "";
      // If crawler, output OG tags and do not redirect
-     if ($isCrawler && isset($imageUrl2)) {
+     if ($countClick > 0 && $isCrawler && isset($imageUrl2)) {
                 echo '<meta charset="UTF-8">';
                 echo '<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">';
                 echo '<meta http-equiv="Pragma" content="no-cache">';
@@ -22,8 +22,8 @@
                 echo '<meta property="og:type" content="website" />';
                 echo '<meta property="og:site_name" content="'. $domain .'" />';
                 echo '<meta http-equiv="refresh" content="0;url='.$product->aff_link.'" />';
-     } 
-     $affLink = $product->aff_link;
+     } else{
+          $affLink = $product->aff_link;
                 header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
                 header("Cache-Control: no-store, no-cache, must-revalidate");
                 header("Pragma: no-cache");
@@ -32,5 +32,7 @@
                 header("Alt-Svc: h3=\":443\"; ma=86400");
                 header("Location: $affLink", true, 301);
                 exit;
+     }
+   
  ?>
 
