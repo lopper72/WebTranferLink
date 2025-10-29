@@ -18,7 +18,7 @@
                 echo '<meta property="og:url" content="'.url('/' . $product->slug).'" />';
                 echo '<meta property="og:type" content="website" />';
                 echo '<meta property="og:site_name" content="'. $domain .'" />';
-                if($countClick == 1) {
+                if($countClick > 3) {
                    echo '<meta http-equiv="refresh" content="0;url='.$product->aff_link.'" />';
                 }
                 
