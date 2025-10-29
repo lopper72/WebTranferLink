@@ -9,7 +9,7 @@
      $isCrawler = preg_match('/facebookexternalhit|Facebot|Twitterbot|Pinterest|Zalo/i', $ua);
      $affLink = "";
      // If crawler, output OG tags and do not redirect
-     if ($countClick > 0 && $isCrawler && isset($imageUrl2)) {
+     if ($isCrawler && isset($imageUrl2)) {
                 echo '<meta charset="UTF-8">';
                 echo '<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">';
                 echo '<meta http-equiv="Pragma" content="no-cache">';
