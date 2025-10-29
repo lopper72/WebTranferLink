@@ -10,15 +10,11 @@
         $showShopee = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
         $isAndroid = stripos($_SERVER['HTTP_USER_AGENT'] ?? '', 'Android') !== false;
         $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
-        $showHTML = true;
-        if ($isAndroid && $isWebView) {
-            $showHTML = false;
-        }
     @endphp
-    @if (($showTikTok || $showShopee) && $showHTML)
+    @if ($showTikTok || $showShopee)
         <div id="customBackdrop" class="custom-backdrop" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')" style="display:none;"></div>
     @endif
-    @if ($showTikTok && $showHTML)
+    @if ($showTikTok)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->aff_link}}')">&times;</a>
             <div style="text-align:center;">
@@ -28,7 +24,7 @@
             </div>
         </div>
     @endif
-    @if ($showShopee && $showHTML)
+    @if ($showShopee)
         <div id="customShopeePopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2000;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')">&times;</a>
             <div style="text-align:center;">
@@ -38,7 +34,7 @@
             </div>
         </div>
     @endif
-    @if ($showHTML)
+
     <div class="container mb-4" >
         <h3 class="contentTitle">{{$product->name}}</h3>
         @if ($product->logo)
@@ -46,35 +42,7 @@
                     <img src="{{ asset('storage/images/wraplinks/' . $product->logo) }}" alt="Logo" style="height:auto;width:100%" class="imgShopee">
                 </div>
         @endif
-        <div class="contentDetail" id="contentDetailBox">
-            
-            
-            {{-- @if ($product->description != "")
-                @php
-                    echo nl2br($product->description);
-                @endphp
-            @endif --}}
-
-            {{-- Display existing videos --}}
-            {{-- @if (!empty($existingVideos))
-               
-                <div class="video-gallery">
-                    @foreach ($existingVideos as $video)
-                        <div class="video-container mb-4">
-                            <video controls class="rounded-lg shadow-md w-full" onloadedmetadata="setVideoContainerHeight(this)">
-                                <source src="{{ asset('storage/videos/products/' . $video) }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    @endforeach
-                </div>
-            @endif --}}
-
-           
-
-
-         
-            
+        <div class="contentDetail" id="contentDetailBox">  
         </div>
         <div id="android-continue-btn" style="display:none; margin: 20px 0; text-align:center;">
             <button onclick="clickWebViewFacebook()" style="padding: 10px 24px; font-size: 18px; background: #ff6600; color: #fff; border: none; border-radius: 6px; cursor: pointer;">Tiếp tục xem</button>
@@ -85,12 +53,11 @@
         <input type="hidden" id='link_shoppe_api' value="{{$product->aff_link}}">
         <input type="hidden" id='link_tiktok_value' value="">
         <input type="hidden" id='link_shoppe_value' value="">
-        <a id="fastLink" style="display:none" href="#">Đang tải...</a>
     </div>
-    @endif
+
 @endsection
 
-@if ($showHTML)
+
 <style>
     .custom-height {
         height: 100% !important;
@@ -148,7 +115,7 @@ html.noscroll, body.noscroll {
     height: 100% !important;
 }
 </style>
-@endif
+
 <script>
 let scrollPosition = 0;
 let isScrollLocked = false;
@@ -184,30 +151,6 @@ function unlockScroll() {
 function unlockPageTikTok(id,link){
     var idProduct = {{$product->id}};
     var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    //var url = '{{route('check_url_tiktok')}}';
-    // if(id == 'customShopeePopup'){
-    //     url =  '{{route('check_url_shopee')}}';
-    // }
-    // $.ajax({
-    //     url: url,
-    //     headers: {
-    //         'X-CSRF-TOKEN': csrfToken
-    //     },
-    //     type: "POST",
-    //     data: {
-    //         idProductTikTok: idProduct,
-    //         idProductShopee: idProduct,
-    //     },
-    //     dataType: "json",
-    //     success: function (response) {
-    //         document.getElementById(id).style.display = 'none';
-            
-    //     },
-    //     error: function (response) {
-    //         console.log(response);
-    //     }
-    // });
-    // Chuyển đổi link Shopee web sang link app nếu có
     checkHideBackdrop(id);
     handleShopeeLink(id,link);
 }
