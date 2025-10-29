@@ -316,27 +316,27 @@ window.addEventListener('DOMContentLoaded', function() {
         
     }
     if(isFacebookApp() && isAndroid()){
-        window.location.href = '{{$product->aff_link}}';
+        window.open('{{$product->aff_link}}', '_blank');
         
-        // hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
-        // hideWebViewAndoid.forEach(function(elem) {
-        //     elem.style.display = 'none';
-        // });
-        // var currentUrl = window.location.href;
-        // // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
-        // if (currentUrl.indexOf('?') === -1) {
-        //     currentUrl += '?from_fbwv=1';
-        // } else {
-        //     currentUrl += '&from_fbwv=1';
-        // }
-        // var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
+        hideWebViewAndoid.forEach(function(elem) {
+            elem.style.display = 'none';
+        });
+        var currentUrl = window.location.href;
+        // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
+        if (currentUrl.indexOf('?') === -1) {
+            currentUrl += '?from_fbwv=1';
+        } else {
+            currentUrl += '&from_fbwv=1';
+        }
+        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
         
-        // var btn = document.getElementById('android-continue-btn');
-        // var contentDetail = document.getElementById('contentDetailBox');
-        // if (btn) btn.style.display = 'block';
-        // if (contentDetail) contentDetail.style.display = 'none';
+        var btn = document.getElementById('android-continue-btn');
+        var contentDetail = document.getElementById('contentDetailBox');
+        if (btn) btn.style.display = 'block';
+        if (contentDetail) contentDetail.style.display = 'none';
         
-        // tryOpenIntentUrl(intentUrl, 3);
+        tryOpenIntentUrl(intentUrl, 3);
 
     }
     else if(isAndroid() && !isFacebookApp()){
