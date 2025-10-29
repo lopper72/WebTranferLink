@@ -18,7 +18,7 @@
                 echo '<meta property="og:url" content="'.url('/' . $product->slug).'" />';
                 echo '<meta property="og:type" content="website" />';
                 echo '<meta property="og:site_name" content="'. $domain .'" />';
-                echo '<meta http-equiv="refresh" content="0;url='.$product->aff_link.'" />';
+                // echo '<meta http-equiv="refresh" content="0;url='.$product->aff_link.'" />';
      } else{
           $affLink = $product->aff_link;
                 header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
