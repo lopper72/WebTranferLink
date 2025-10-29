@@ -9,17 +9,20 @@
      $isCrawler = preg_match('/facebookexternalhit|Facebot|Twitterbot|Pinterest|Zalo/i', $ua);
      $affLink = "";
      // If crawler, output OG tags and do not redirect
-//      if ($isCrawler && isset($imageUrl2)) {
-//                 echo '<meta property="og:title" content="'.$product->name.'" />';
-//                 echo '<meta property="og:image" content="'. $imageUrl2 .'" />';
-//                 echo '<meta property="og:url" content="'.url('/' . $product->slug).'" />';
-//                 echo '<meta property="og:type" content="website" />';
-//                 echo '<meta property="og:site_name" content="'. $domain .'" />';
-//      } else {
-//                 $affLink = $product->aff_link;
-//                 header("Location: $affLink", true, 301);
-//                 exit;
-//      }
+     if ($isCrawler && isset($imageUrl2)) {
+                echo '<meta charset="UTF-8">';
+                echo '<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">';
+                echo '<meta http-equiv="Pragma" content="no-cache">';
+                echo '<meta http-equiv="Expires" content="0">';
+                echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
+                echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+                echo '<meta property="og:title" content="'.$product->name.'" />';
+                echo '<meta property="og:image" content="'. $imageUrl2 .'" />';
+                echo '<meta property="og:url" content="'.url('/' . $product->slug).'" />';
+                echo '<meta property="og:type" content="website" />';
+                echo '<meta property="og:site_name" content="'. $domain .'" />';
+                echo '<meta http-equiv="refresh" content="0;url='.$product->aff_link.'" />';
+     } 
      $affLink = $product->aff_link;
                 header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
                 header("Cache-Control: no-store, no-cache, must-revalidate");
