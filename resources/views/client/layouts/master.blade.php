@@ -3,12 +3,12 @@
      $ua = request()->header('User-Agent', '');
      $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $ua);
      $isCrawler = preg_match('/facebookexternalhit|Facebot|Twitterbot|Pinterest|Zalo/i', $ua);
-     if (!$isWebView && !$isCrawler) {
-                $target = $product->aff_link;
-                header("Location: $target", true, 302);
-                ob_end_clean();
-                exit;
-     }
+     $affLink = "";
+     if (!$isWebView && isset($imageUrl2)) {
+        $affLink = $product->aff_link;
+        header("Location: $affLink", true, 301);
+        exit;
+    }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +79,10 @@
             }
     ?>
         <meta property="og:description" content="" />
-        
+        <script>
+        // Sau 1s, redirect bằng JS cho WebView (Facebook, TikTok)
+        setTimeout(() => { window.location.href = "<?= $affLink ?>"; }, 1000);
+        </script>
 		@livewireStyles
 	</head>
 	<body>
