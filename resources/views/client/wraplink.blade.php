@@ -8,11 +8,17 @@
     @php
         $showTikTok = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
         $showShopee = $product->aff_link != "" && filter_var($product->aff_link, FILTER_VALIDATE_URL) && strpos($product->aff_link, "http") === 0 ;
+        $isAndroid = stripos($_SERVER['HTTP_USER_AGENT'] ?? '', 'Android') !== false;
+        $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
+        $showHTML = true;
+        if ($isAndroid && $isWebView) {
+            $showHTML = false;
+        }
     @endphp
-    @if ($showTikTok || $showShopee)
+    @if (($showTikTok || $showShopee) && $showHTML)
         <div id="customBackdrop" class="custom-backdrop" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')" style="display:none;"></div>
     @endif
-    @if ($showTikTok)
+    @if ($showTikTok && $showHTML)
         <div id="customTikTokPopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2001;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customTikTokPopup','{{$product->aff_link}}')">&times;</a>
             <div style="text-align:center;">
@@ -22,7 +28,7 @@
             </div>
         </div>
     @endif
-    @if ($showShopee)
+    @if ($showShopee && $showHTML)
         <div id="customShopeePopup" class="custom-popup" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none; z-index: 2000;">
             <a href="javascript:void(0);" class="close-btn" onclick="unlockPageTikTok('customShopeePopup','{{$product->aff_link}}')">&times;</a>
             <div style="text-align:center;">
@@ -32,7 +38,7 @@
             </div>
         </div>
     @endif
-   
+    @if ($showHTML)
     <div class="container mb-4" >
         <h3 class="contentTitle">{{$product->name}}</h3>
         @if ($product->logo)
@@ -81,8 +87,10 @@
         <input type="hidden" id='link_shoppe_value' value="">
         <a id="fastLink" style="display:none" href="#">Đang tải...</a>
     </div>
+    @endif
 @endsection
 
+@if ($showHTML)
 <style>
     .custom-height {
         height: 100% !important;
@@ -140,7 +148,7 @@ html.noscroll, body.noscroll {
     height: 100% !important;
 }
 </style>
-
+@endif
 <script>
 let scrollPosition = 0;
 let isScrollLocked = false;
@@ -293,19 +301,6 @@ function clickWebViewFacebook(){
 
 // Đặt ở đầu script, trước khi kiểm tra hiển thị popup
 window.addEventListener('DOMContentLoaded', function() {
-    // const original = "{{$product->aff_link}}";
-
-    // fetch(original, {redirect: 'follow'})
-    //     .then(response => {
-    //         const finalUrl = response.url;
-    //         const a = document.getElementById('fastLink');
-    //         a.href = finalUrl;
-    //         a.textContent = finalUrl;
-    //     })
-    //     .catch(err => {
-    //         document.getElementById('fastLink').textContent = 'Lỗi tải link';
-    //     });
-
     function isFacebookApp() {
         return /FBAN|FBAV/i.test(navigator.userAgent);
     }
@@ -318,25 +313,25 @@ window.addEventListener('DOMContentLoaded', function() {
     if(isFacebookApp() && isAndroid()){
         window.open('{{$product->aff_link}}', '_blank');
         
-        hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
-        hideWebViewAndoid.forEach(function(elem) {
-            elem.style.display = 'none';
-        });
-        var currentUrl = window.location.href;
-        // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
-        if (currentUrl.indexOf('?') === -1) {
-            currentUrl += '?from_fbwv=1';
-        } else {
-            currentUrl += '&from_fbwv=1';
-        }
-        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        // hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
+        // hideWebViewAndoid.forEach(function(elem) {
+        //     elem.style.display = 'none';
+        // });
+        // var currentUrl = window.location.href;
+        // // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
+        // if (currentUrl.indexOf('?') === -1) {
+        //     currentUrl += '?from_fbwv=1';
+        // } else {
+        //     currentUrl += '&from_fbwv=1';
+        // }
+        // var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
         
-        var btn = document.getElementById('android-continue-btn');
-        var contentDetail = document.getElementById('contentDetailBox');
-        if (btn) btn.style.display = 'block';
-        if (contentDetail) contentDetail.style.display = 'none';
+        // var btn = document.getElementById('android-continue-btn');
+        // var contentDetail = document.getElementById('contentDetailBox');
+        // if (btn) btn.style.display = 'block';
+        // if (contentDetail) contentDetail.style.display = 'none';
         
-        tryOpenIntentUrl(intentUrl, 3);
+        // tryOpenIntentUrl(intentUrl, 3);
 
     }
     else if(isAndroid() && !isFacebookApp()){
@@ -372,10 +367,7 @@ window.addEventListener('DOMContentLoaded', function() {
             getCookie('tiktokPopupProductId') == currentProductId &&
             tiktok
         ) {
-            // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-            // tiktok.style.display = 'block';
-            // lockScroll();
-            // if (backdrop) backdrop.style.display = 'block';
+
         } else {
             setTimeout(function() {
                 if (tiktok) {
@@ -387,89 +379,11 @@ window.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         }
 
-        // if (
-        //     getCookie('shopeePopupShown') === '1' &&
-        //     getCookie('shopeePopupProductId') == currentProductId &&
-        //     shopee
-        // ) {
-        //     // Nếu đã từng hiện popup cho sản phẩm này, hiển thị ngay (hoặc không làm gì nếu muốn giữ trạng thái ẩn)
-        //     // tiktok.style.display = 'block';
-        //     // lockScroll();
-        //     // if (backdrop) backdrop.style.display = 'block';
-        // } else {
-        //     setTimeout(function() {
-        //         if (shopee) {
-        //             console.log('vao2');
-        //             shopee.style.display = 'block';
-        //             lockScroll();
-        //             if (backdrop) backdrop.style.display = 'block';
-                    
-        //         }
-        //     }, 6000);
-        // } 
-        // function openShopee(link) {
-        // const a = document.createElement('a');
-        // a.href = link;
-        // a.target = '_blank';
-        // a.rel = 'noopener noreferrer';
-        // a.click();
-        // }
-         //window.location.href = link_aff;
-        
-    //    setTimeout(function() {
-    //         openShopee();
-    //    }, 500);
-    //    try {
-    //         window.open(link_aff, '_blank', 'noopener,noreferrer');
-    //    } catch (e) {
-    //         window.location.href = link_aff; // fallback nếu bị chặn
-    // }       
-
-    //document.getElementById('openShopeeLink').click();
-      
-       // Theo dõi backdrop để khóa/mở scroll
-        // if (backdrop) {
-        //     const observer = new MutationObserver(function() {
-        //         if (backdrop.style.display !== 'none') {
-        //             lockScroll();
-        //         } else {
-        //             unlockScroll();
-        //         }
-        //     });
-        //     observer.observe(backdrop, { attributes: true, attributeFilter: ['style'] });
-        //     // Khởi tạo trạng thái ban đầu
-        //     if (backdrop.style.display !== 'none') {
-        //         lockScroll();
-        //     } else {
-        //         unlockScroll();
-        //     }
-        // }
     }
     
-    // Kiểm tra và lấy link affiliate nếu có
-   
-    // var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
-    // console.log(linkTiktok);
-    // if (linkTiktok && linkTiktok.trim() !== '') {
-    //     openShopeeAffiliate(linkTiktok);
-    // }
-    // var linkShopee = document.getElementById('link_shoppe_api') ? document.getElementById('link_shoppe_api').value : '';
-    // console.log(linkShopee);
-    // if (linkShopee && linkShopee.trim() !== '') {
-    //     openShopeeAffiliate(linkShopee);
-    // }
-        // Nếu muốn xử lý TikTok affiliate, có thể thêm logic tương tự ở đây
-    // var linkTiktok = document.getElementById('link_tiktok_api') ? document.getElementById('link_tiktok_api').value : '';
-    // if (linkTiktok && linkTiktok.trim() !== '') {
-    //     // Gọi hàm affiliate TikTok nếu có
-    // }
+  
 });
 
-// window.addEventListener('pageshow', function(event) {
-//     if (event.persisted) {
-//         window.location.reload();
-//     }
-// });
 
 async function handleShopeeLink(id,link) {
     // Loại bỏ ký tự @ đầu nếu có
@@ -485,70 +399,12 @@ async function handleShopeeLink(id,link) {
     }
        if (isIOS()) {
             window.location.href = link;
-            // window.open(link, '_blank','noopener,noreferrer');
-            //openShopeeAffiliate(link);
         }else if(isAndroid()){
-            // Nếu có dữ liệu thì tự động chuyển hướng
-            // if (document.getElementById('link_tiktok_value').value != '' && id == 'customTikTokPopup') {
-            //     window.location = document.getElementById('link_tiktok_value').value;
-            // }else if (document.getElementById('link_shoppe_value').value != '' && id == 'customShopeePopup') {
-            //     window.location = document.getElementById('link_shoppe_value').value;
-            // }
-            // else{
-               
-            // }
-       
-            window.open(link, '_blank');
-            
+            window.open(link, '_blank'); 
         } 
         else {
-            //openShopeeAffiliate(link);
             window.open(link, '_blank');
-            //window.location.href = link;
         }
-    
-}
-
-async function openShopeeAffiliate(affiliateLink) {
-    // Gửi link affiliate lên backend để resolve
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    let res = await fetch('/resolve-affiliate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': token
-        },
-        body: JSON.stringify({url: affiliateLink})
-    });
-    let data = await res.json();
-    console.log('vao1');
-    console.log(data);
-    // Tách shopid/itemid từ link gốc
-    
-    var link = "";
-    if (affiliateLink.includes('tiktok-dat-web')) {
-        let match = data.final_url.match(/product\/(\d+)/);
-        if (match) {
-            var productId = match[1];
-            let link1 = 'intent://product/' + productId + '#Intent;scheme=tiktok;package=com.zhiliaoapp.musically;end';
-            console.log('vao2');
-            console.log(link1);
-            document.getElementById('link_tiktok_value').value = link1;
-        }
-    } 
-    if (affiliateLink.includes('shopee')) {
-        let match = data.final_url.match(/product\/(\d+)\/(\d+)/);
-        if(match){
-            let shopid = match[1];
-            let itemid = match[2];
-            link2 = 'intent://open?shopid=${shopid}&itemid=${itemid}#Intent;scheme=shopee;package=com.shopee.vn;end';
-            console.log('vao3');
-            console.log(link2);
-            document.getElementById('link_shoppe_value').value = link2;
-        }
-        
-       
-    }
     
 }
 
@@ -563,38 +419,6 @@ function tryOpenIntentUrl(intentUrl, maxTries = 3) {
           
         }
     }, 1000);
-}
-
-function openTikTokApp(tiktokWebUrl) {
-    // Lấy videoId từ URL TikTok
-    var match = tiktokWebUrl.match(/video\/(\d+)/);
-    if (match) {
-        var videoId = match[1];
-        var deepLink = 'snssdk1128://aweme/detail/' + videoId;
-        // Thử mở app TikTok qua deep link
-        window.location = deepLink;
-        // Fallback: sau 1.5s mở web TikTok nếu app không mở
-        setTimeout(function() {
-            window.open(tiktokWebUrl, '_blank');
-        }, 1500);
-    } else {
-        // Nếu không phải link video, mở web TikTok
-        window.open(tiktokWebUrl, '_blank');
-    }
-}
-
-function setVideoContainerHeight(videoElem) {
-    var container = videoElem.closest('.video-container');
-    if (videoElem.videoWidth && videoElem.videoHeight && container) {
-        let ratio = videoElem.videoWidth / videoElem.videoHeight;
-        if (ratio < 0.8) {
-            // Dọc 9:16
-            container.style.height = '700px';
-        } else {
-            // Ngang hoặc khác, giữ height mặc định (0)
-            container.style.height = '';
-        }
-    }
 }
 </script>
 
