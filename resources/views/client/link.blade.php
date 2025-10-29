@@ -21,6 +21,12 @@
 //                 exit;
 //      }
      $affLink = $product->aff_link;
+                header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
+                header("Cache-Control: no-store, no-cache, must-revalidate");
+                header("Pragma: no-cache");
+                header("Expires: 0");
+                header("Connection: keep-alive");
+                header("Alt-Svc: h3=\":443\"; ma=86400");
                 header("Location: $affLink", true, 301);
                 exit;
  ?>
