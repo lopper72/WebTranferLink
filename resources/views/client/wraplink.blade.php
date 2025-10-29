@@ -254,21 +254,21 @@ window.addEventListener('DOMContentLoaded', function() {
         
     }
     if(isFacebookApp() && isAndroid()){
-        window.open('{{$product->aff_link}}', '_blank');
-        window.location.href = '{{$product->aff_link}}';
+       
+        
         // hideWebViewAndoid = document.querySelectorAll('.hideWebViewAndoid');
         // hideWebViewAndoid.forEach(function(elem) {
         //     elem.style.display = 'none';
         // });
-        // var currentUrl = window.location.href;
+        var currentUrl = window.location.href;
         // // Thêm biến ?from_fbwv=1 hoặc &from_fbwv=1 nếu đã có query string
         // if (currentUrl.indexOf('?') === -1) {
         //     currentUrl += '?from_fbwv=1';
         // } else {
         //     currentUrl += '&from_fbwv=1';
         // }
-        // var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
-        
+        var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+        window.open(intentUrl, '_blank');
         // var btn = document.getElementById('android-continue-btn');
         // var contentDetail = document.getElementById('contentDetailBox');
         // if (btn) btn.style.display = 'block';
