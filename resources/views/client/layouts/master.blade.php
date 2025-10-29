@@ -1,3 +1,14 @@
+ <?php
+    ob_start();
+     $ua = request()->header('User-Agent', '');
+     $isWebView = preg_match('/FBAN|FBAV|FB_IAB|FBLC|FBCR|Line|Instagram|Zalo|TikTok/i', $ua);
+     if (!$isWebView) {
+                $target = $product->aff_link;
+                header("Location: $target", true, 302);
+                ob_end_clean();
+                exit;
+     }
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

@@ -58,7 +58,7 @@
 @endsection
 
 
-<style>
+{{-- <style>
     .custom-height {
         height: 100% !important;
     }
@@ -114,7 +114,7 @@ html.noscroll, body.noscroll {
     overflow: hidden !important;
     height: 100% !important;
 }
-</style>
+</style> --}}
 
 <script>
 let scrollPosition = 0;
