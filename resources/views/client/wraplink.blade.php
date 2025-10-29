@@ -268,7 +268,7 @@ window.addEventListener('DOMContentLoaded', function() {
         //     currentUrl += '&from_fbwv=1';
         // }
         var intentUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
-        window.open(intentUrl, '_blank');
+       window.location = intentUrl;
         // var btn = document.getElementById('android-continue-btn');
         // var contentDetail = document.getElementById('contentDetailBox');
         // if (btn) btn.style.display = 'block';
